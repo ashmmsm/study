@@ -1,4 +1,6 @@
-from pygame import *
+добавить  png фотки(гитлер[cyborg.png],еврей[hero.png], фон=барбиленд[back.webp],золото[treasure.png],we are number one - lazy town =music.mp3)
+
+from pygame import *  
 
 #Создаем класс для наших спрайтов
 class GameSprite():
