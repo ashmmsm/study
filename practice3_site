@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+
+<h1 class="user">Sumaya</h1>
+
+
+<img class="pei" src="https://papik.pro/izobr/uploads/posts/2023-03/1679660505_papik-pro-p-peizazh-zhivopisnii-21.jpg" alt="">
+
+<div class="box">
+    <h1 class="set">Instagram</h1>
+    <input placeholder="tel jaz" class="stroka" type="text"><br>
+    <input placeholder="parol" class="pass" type="password"><br>
+    <button><a href="https://www.instagram.com/?hl=ru">Войти</a></button>
+</div>
+
+<ul>
+    <li>sumaya</li>
+</ul>
+<ol>
+    <li>sumaya</li>
+</ol>
+
+<i>tilek</i>
+<b>it</b>
+<sub>bishkek</sub>
+<sup>bishkek</sup>
+<span>lorem200</span>
+    
+</body>
+</html>
+
+
+
+
+.pei{
+    width: 300px;
+}
+.user{
+    color: blueviolet;
+}
+.box{
+    width: 300px; 
+    height: 300px;
+    border: 1px solid;
+    margin: auto;
+    background-image: url("https://crosti.ru/patterns/00/22/8b/f2_picture_07243c8d.jpg");
+}
+.set{
+    margin-left: 70px;
+    color: aliceblue;
+}
+.stroka{
+    margin-left: 70px;
+    margin-top: 10px;
+    color: blue;
+}
+.pass{
+    margin-left: 70px;
+    margin-top: 10px;
+    color: yellow;
+}
+button{
+    width: 169px;
+    margin-left: 70px;
+    margin-top: 10px;
+}
+button:hover{
+    background-color: yellow;
+    color: red;
+    border-radius: 10px;
+}
