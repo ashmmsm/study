@@ -1,0 +1,123 @@
+5 интересных гипотез для анализа:
+
+Гипотеза 1: В McDonald's можно выбрать блюда, которые в сумме не превышают 500 калорий, при этом будут сбалансированы по содержанию БЖУ.
+Гипотеза 2: Завтраки в McDonald's чаще всего содержат больше калорий, чем блюда для обеда или ужина.
+Гипотеза 3: Блюда с низким содержанием калорий часто имеют высокое содержание углеводов.
+Гипотеза 4: Вегетарианские блюда в McDonald's содержат меньше калорий и жиров, чем блюда с мясом.
+Гипотеза 5: Содержание витаминов и минералов (например, кальция и железа) выше в более калорийных блюдах.
+
+Объяснение кода:
+
+Загрузка и очистка данных: Мы загружаем CSV-файл и приводим данные в нужный формат, устраняя пропуски и конвертируя типы данных, где это необходимо.
+Гипотезы:
+
+Для каждой гипотезы мы фильтруем данные и строим графики, чтобы визуализировать зависимости.
+Мы используем seaborn для создания красивых визуализаций и matplotlib для отображения графиков.
+Визуализация: Для каждой гипотезы строятся графики, такие как диаграммы рассеяния, боксплоты и столбчатые диаграммы, для понимания взаимосвязей между переменными.
+
+Результат анализа:
+
+Мы можем увидеть, как калории и содержание БЖУ соотносятся между собой для различных блюд.
+Анализируем, как распределяются калории для завтраков и других категорий.
+Также рассматриваем, как калории соотносятся с содержанием углеводов и витаминов.
+
+
+
+# Импортируем нужные библиотеки
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Загружаем данные
+data = pd.read_csv('menu.csv')
+
+# Просмотрим первые несколько строк данных
+print(data.head())
+
+# Очистим данные, чтобы избежать пропусков и привести их к нужному виду
+data = data.dropna(subset=["Calories", "Total Fat", "Carbohydrates", "Protein", "Sodium", "Vitamin A (% Daily Value)"])
+
+# Преобразуем данные, если нужно (например, удалим символы из столбцов, если они есть)
+data["Calories"] = data["Calories"].astype(int)
+data["Total Fat"] = data["Total Fat"].astype(float)
+data["Carbohydrates"] = data["Carbohydrates"].astype(float)
+data["Protein"] = data["Protein"].astype(float)
+data["Sodium"] = data["Sodium"].astype(int)
+data["Vitamin A (% Daily Value)"] = data["Vitamin A (% Daily Value)"].astype(float)
+
+# Гипотеза 1: В McDonald's можно выбрать блюда, которые в сумме не превышают 500 калорий, при этом сбалансированы по БЖУ
+under_500_calories = data[data["Calories"] <= 500]
+
+# Сбалансированность по БЖУ: соотношение белков, жиров и углеводов (БЖУ в процентах от калорий)
+under_500_calories["Protein_ratio"] = under_500_calories["Protein"] / under_500_calories["Calories"] * 100
+under_500_calories["Fat_ratio"] = under_500_calories["Total Fat"] / under_500_calories["Calories"] * 100
+under_500_calories["Carb_ratio"] = under_500_calories["Carbohydrates"] / under_500_calories["Calories"] * 100
+
+# # Визуализация сбалансированности БЖУ
+# plt.figure(figsize=(10, 6))
+# sns.scatterplot(data=under_500_calories, x="Protein_ratio", y="Fat_ratio", hue="Category", palette="Set2")
+# plt.title("Соотношение Белков и Жиров для блюд с калориями <= 500")
+# plt.xlabel("Процент Белков от Калорий")
+# plt.ylabel("Процент Жиров от Калорий")
+# plt.legend()
+# plt.show()
+
+# Гипотеза 2: Завтраки в McDonald's содержат больше калорий, чем другие блюда
+breakfast = data[data["Category"] == "Breakfast"]
+other_meals = data[data["Category"] != "Breakfast"]
+
+# Сравниваем среднее количество калорий для завтраков и других блюд
+mean_calories_breakfast = breakfast["Calories"].mean()
+mean_calories_other = other_meals["Calories"].mean()
+
+# # Визуализация
+# plt.figure(figsize=(8, 6))
+# sns.boxplot(x="Category", y="Calories", data=data, palette="Set1")
+# plt.title("Распределение калорий для завтраков и других блюд")
+# plt.show()
+
+# Гипотеза 3: Блюда с низким содержанием калорий часто имеют высокое содержание углеводов
+low_calories = data[data["Calories"] <= 300]
+
+# Визуализируем зависимость калорий и углеводов
+plt.figure(figsize=(8, 6))
+sns.scatterplot(x="Calories", y="Carbohydrates", data=low_calories, hue="Category", palette="Set3")
+plt.title("Зависимость между калориями и углеводами в блюдах с калориями <= 300")
+plt.xlabel("Калории")
+plt.ylabel("Углеводы (г)")
+plt.legend()
+plt.show()
+
+# Гипотеза 4: Вегетарианские блюда содержат меньше калорий и жиров, чем блюда с мясом
+# Для этого нужно будет добавить категорию вегетарианских блюд, если эта информация есть в данных
+
+# Для примера просто покажем средние значения калорий и жиров для разных категорий
+category_means = data.groupby("Category")[["Calories", "Total Fat"]].mean()
+
+# Визуализация
+category_means.plot(kind="bar", figsize=(10, 6))
+plt.title("Средние значения калорий и жиров по категориям")
+plt.xlabel("Категория")
+plt.ylabel("Среднее значение")
+plt.show()
+
+# Гипотеза 5: Содержание витаминов и минералов выше в более калорийных блюдах
+# Мы проанализируем зависимость между калориями и содержанием витамина A и кальция
+
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x="Calories", y="Vitamin A (% Daily Value)", data=data, hue="Category", palette="Set2")
+plt.title("Зависимость между калориями и содержанием витамина A")
+plt.xlabel("Калории")
+plt.ylabel("Витамин A (% Daily Value)")
+plt.legend()
+plt.show()
+
+# Также для кальция:
+plt.figure(figsize=(10, 6))
+sns.scatterplot(x="Calories", y="Calcium (% Daily Value)", data=data, hue="Category", palette="Set2")
+plt.title("Зависимость между калориями и содержанием кальция")
+plt.xlabel("Калории")
+plt.ylabel("Кальций (% Daily Value)")
+plt.legend()
+plt.show()
