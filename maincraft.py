@@ -237,18 +237,15 @@ class Mapmanager():
        self.startNew()
        # self.addBlock((0,10, 0))
 
-
    def startNew(self):
        """создаёт основу для новой карты"""
        self.land = render.attachNewNode("Land") # узел, к которому привязаны все блоки карты
-
 
    def getColor(self, z):
        if z < len(self.colors):
            return self.colors[z]
        else:
            return self.colors[len(self.colors) - 1]
-
 
    def addBlock(self, position):
        # создаём строительные блоки
@@ -267,7 +264,6 @@ class Mapmanager():
        blocks = self.findBlocks(position) #['блок 1', 'блок 2',...]
        for block in blocks:
            block.removeNode()
-
 
    def clear(self):
        """обнуляет карту"""
@@ -289,6 +285,38 @@ class Mapmanager():
                    x += 1
                y += 1
        return x,y
+   
+   def findblocks(self, pos):
+       return self.land.findAllMatches("=at=" + str(pos))
+   
+   class Mapmanager():
+
+        def isEmpty(self,pos):
+            blocks = self.findBlocks(pos)
+            if blocks:
+                return False
+            else:
+                return True
+
+        def findHighestEmpty(self,pos):
+            x,y,z = pos
+            z = 1
+            while not self.isEmpty((x,y,z)):
+                z += 1
+                return (x, y, z)
+
+
+
+        #def buildBlock(self,pos):
+
+
+
+   def delBlock(self,position):
+       """удаляет блоки в указанной позиции"""
+       blocks = self.findBlocks(position)
+       for block in blocks:
+           
+
 
 
 land.txt
