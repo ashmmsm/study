@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock Store</title>
+    <!-- Подключаем Bootstrap и внешний файл стилей -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="fade-in">
+
+    <!-- Навигационная панель -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Clock Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="mt-4">Clock Store</h1>
+
+        <!-- Форма фильтрации и поиска -->
+        <form method="get" action="/" class="mb-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <input type="text" class="form-control" name="search" value="{{ search_query }}" placeholder="Search by title">
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control" name="min_price" value="{{ min_price }}" placeholder="Min price">
+                </div>
+                <div class="col-md-2">
+                    <input type="number" class="form-control" name="max_price" value="{{ max_price }}" placeholder="Max price">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-control" name="sort_by">
+                        <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Sort by title</option>
+                        <option value="price" {% if sort_by == 'price' %}selected{% endif %}>Sort by price</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary btn-block">Filter</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Список игр -->
+        <div class="row">
+            {% for game in games.items %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ game.image_url }}" class="card-img-top" alt="{{ game.title }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ game.title }}</h5>
+                            <p class="card-text">{{ game.description[:150] }}...</p>
+                        </div>
+                        <div class="card-footer">
+                            <p><strong>${{ game.price }}</strong></p>
+                            <a href="#" class="btn btn-primary">Buy Now</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Пагинация -->
+        <div class="pagination">
+            {% if games.has_prev %}
+                <a href="{{ url_for('index', page=games.prev_num) }}" class="btn btn-outline-primary">Previous</a>
+            {% endif %}
+            <span>Page {{ games.page }} of {{ games.pages }}</span>
+            {% if games.has_next %}
+                <a href="{{ url_for('index', page=games.next_num) }}" class="btn btn-outline-primary">Next</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Подвал -->
+    <footer class="footer">
+        <p>&copy; 2025 Clock Store. All rights reserved. <a href="#">Privacy Policy</a></p>
+    </footer>
+    
+
+
+
+</div>
+<section class="footer">
+    <div class="box-container">
+        <div class="box">
+            <h3>Extra links</h3>
+            <a href="https://www.instagram.com/ashmmsm">instagram</a>
+            <a href="https://t.me/nevcomer">telegram</a>
+        </div>
+    </div>
+        <div class="box">
+            <h3>Contact info</h3>
+            <a href="#">+996707227482</a>
+            <a href="#">ashirmamatovasumaya@gmail.com</a>
+            <a href="#">Kyrgyzstan - Bishkek</a>
+        </div>
+</div>    
+
+
+    <!-- Скрипты для работы Bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

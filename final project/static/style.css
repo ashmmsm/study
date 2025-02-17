@@ -1,0 +1,189 @@
+/* Общие стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #75a13a;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: bold;
+}
+
+/* Навигационная панель */
+.navbar {
+    background-color: #c78915;
+    padding: 20px;
+}
+
+.navbar-brand {
+    color: #ecf0f1;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #ecf0f1;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+    color: #ffdb58;
+}
+
+.navbar-toggler-icon {
+    background-color: #ecf0f1;
+}
+
+/* Карточки с играми */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.651);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card-img-top {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.card-img-top:hover {
+    transform: scale(1.05);
+}
+
+.card-body {
+    background-color: #ffffff;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.card-text {
+    font-size: 1rem;
+    margin-bottom: 15px;
+}
+
+.card-footer {
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    text-align: center;
+}
+
+.card-footer .btn {
+    width: 100%;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+}
+
+.card-footer .btn:hover {
+    background-color: #2980b9;
+}
+
+/* Пагинация */
+.pagination {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination a {
+    border-radius: 50%;
+    margin: 0 5px;
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #2980b9;
+}
+
+.pagination .disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+/* Подвал */
+.footer {
+    background-color: #5f311c;
+    color: #ecf0f1;
+    padding: 30px;
+    text-align: center;
+    font-size: 1rem;
+}
+
+.footer a {
+    color: #ffdb58;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #fff;
+}
+
+/* Анимации */
+.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Адаптивность */
+@media (max-width: 767px) {
+    .navbar-brand {
+        font-size: 1.6rem;
+    }
+
+    .card-img-top {
+        height: 200px;
+    }
+
+    .card-body {
+        padding: 15px;
+    }
+
+    .pagination a {
+        padding: 8px 10px;
+    }
+}                               
